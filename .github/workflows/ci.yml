@@ -1,0 +1,49 @@
+name: CI - Test and Coverage
+
+on:
+  push:
+    branches: [dev]
+  pull_request:
+    branches: [dev]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Run tests with coverage
+        run: npx vitest run --coverage
+
+      - name: Enforce minimum coverage
+        run: |
+          COVERAGE=$(npx vitest run --coverage --reporter=json-summary --silent)
+          TOTAL=$(node -pe "require('./coverage/coverage-summary.json').total.statements.pct")
+          echo "Total coverage: $TOTAL%"
+          if [ "$TOTAL" -lt 50 ]; then
+            echo "Coverage is below 50%"
+            exit 1
+          else
+            echo "Coverage is acceptable"
+          fi
+
+      - name: Post-job cleanup
+        if: always()
+        run: echo "Cleanup or notify step"
