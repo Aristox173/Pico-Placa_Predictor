@@ -1,10 +1,13 @@
 import { Outlet } from "react-router-dom";
 import "../styles/DashboardMain.css";
+import Container from "../components/Container";
 
 export default function DashboardMain() {
   return (
     <main className="dashboard-main">
-      <Outlet />
+      <Container>
+        <Outlet />
+      </Container>
     </main>
   );
 }
