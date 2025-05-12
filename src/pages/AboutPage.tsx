@@ -1,3 +1,12 @@
-export default function AboutPage() {
-  return <h1>Acerca de mí</h1>;
-}
+import PageHeader from "../components/PageHeader";
+
+const AboutPage = () => {
+  return (
+    <PageHeader
+      title="About Me"
+      subtitle="Learn more about the developer behind this application"
+    />
+  );
+};
+
+export default AboutPage;

@@ -1,14 +1,13 @@
 import "../../styles/SidebarHeader.css";
+import type { SidebarHeaderProps } from "../../types/SidebarHeader.types";
 
-type Props = {
-  collapsed: boolean;
-  toggle: () => void;
-};
-
-export default function SidebarHeader({ collapsed, toggle }: Props) {
+export default function SidebarHeader({
+  collapsed,
+  toggle,
+}: SidebarHeaderProps) {
   return (
     <div className="sidebar__header">
-      {!collapsed && <span className="sidebar__title">MIND AR</span>}
+      {!collapsed && <span className="sidebar__title">PREDICTOR</span>}
       <button onClick={toggle} className="sidebar__toggle-button">
         <img
           src={

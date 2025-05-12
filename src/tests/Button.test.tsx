@@ -3,8 +3,8 @@ import Button from "../components/Button";
 
 describe("Button component", () => {
   test("renders with label", () => {
-    render(<Button label="Hola" />);
-    expect(screen.getByText("Hola")).toBeInTheDocument();
+    render(<Button label="Hello" />);
+    expect(screen.getByText("Hello")).toBeInTheDocument();
   });
 
   test("fires onClick when clicked", () => {

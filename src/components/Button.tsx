@@ -1,13 +1,6 @@
 import "../styles/Button.css";
 import React from "react";
-
-type ButtonProps = {
-  label: string;
-  icon?: string;
-  onClick?: () => void;
-  variant?: "primary" | "secondary";
-  disabled?: boolean;
-};
+import type { ButtonProps } from "../types/Button.types";
 
 const Button: React.FC<ButtonProps> = ({
   label,

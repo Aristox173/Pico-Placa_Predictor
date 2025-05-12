@@ -1,13 +1,6 @@
 import { Link } from "react-router-dom";
 import "../../styles/SidebarLink.css";
-
-type Props = {
-  to: string;
-  icon: string;
-  label: string;
-  isActive: boolean;
-  collapsed: boolean;
-};
+import type { SidebarLinkProps } from "../../types/SidebarLink.types";
 
 export default function SidebarLink({
   to,
@@ -15,7 +8,7 @@ export default function SidebarLink({
   label,
   isActive,
   collapsed,
-}: Props) {
+}: SidebarLinkProps) {
   return (
     <Link
       to={to}
