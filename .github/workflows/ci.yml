@@ -34,7 +34,7 @@ jobs:
 
       - name: Enforce minimum coverage
         run: |
-          COVERAGE=$(npx vitest run --coverage --reporter=json-summary --silent)
+          COVERAGE=$(npx vitest run --coverage --reporter=json --silent)
           TOTAL=$(node -pe "require('./coverage/coverage-summary.json').total.statements.pct")
           echo "Total coverage: $TOTAL%"
           if [ "$TOTAL" -lt 50 ]; then
