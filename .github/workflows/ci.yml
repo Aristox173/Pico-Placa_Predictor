@@ -30,18 +30,17 @@ jobs:
         run: npm run build
 
       - name: Run tests with coverage
-        run: npx vitest run --coverage
+        run: npx vitest run --coverage --silent
 
       - name: Enforce minimum coverage
         run: |
-          COVERAGE=$(npx vitest run --coverage --reporter=json --silent)
           TOTAL=$(node -pe "require('./coverage/coverage-summary.json').total.statements.pct")
-          echo "Total coverage: $TOTAL%"
-          if [ "$TOTAL" -lt 50 ]; then
-            echo "Coverage is below 50%"
+          echo "Total statement coverage: $TOTAL%"
+          if [ $TOTAL -lt 50 ]; then
+            echo "❌ Coverage is below 50%"
             exit 1
           else
-            echo "Coverage is acceptable"
+            echo "✅ Coverage is acceptable"
           fi
 
       - name: Post-job cleanup
