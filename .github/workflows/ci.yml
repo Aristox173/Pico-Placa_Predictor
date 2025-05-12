@@ -1,13 +1,13 @@
 name: CI - Test and Coverage
 
 on:
-  push:
-    branches: [dev]
   pull_request:
+    types: [closed]
     branches: [dev]
 
 jobs:
   test:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -32,17 +32,21 @@ jobs:
       - name: Run tests with coverage
         run: npx vitest run --coverage --silent
 
-      - name: Enforce minimum coverage
+      - name: Enforce minimum coverage (>= 70%)
         run: |
           TOTAL=$(node -pe "require('./coverage/coverage-summary.json').total.statements.pct")
           echo "Total statement coverage: $TOTAL%"
-          if [ $TOTAL -lt 50 ]; then
-            echo "❌ Coverage is below 50%"
+          if [ "$TOTAL" -lt 70 ]; then
+            echo "Coverage is below 70%"
             exit 1
           else
-            echo "✅ Coverage is acceptable"
+            echo "Coverage is acceptable (>= 70%)"
           fi
 
-      - name: Post-job cleanup
-        if: always()
-        run: echo "Cleanup or notify step"
+      - name: Post-job success
+        if: success()
+        run: echo "🎉 Pipeline finalizado correctamente. ¡Todo en orden!"
+
+      - name: Post-job failure
+        if: failure()
+        run: echo "🚨 El pipeline falló. Revisa los errores y el nivel de cobertura."
