@@ -1,6 +1,6 @@
-import Sidebar from "../components/Sidebar/Sidebar";
+import { Sidebar } from "../components";
 import DashboardMain from "./DashboardMain";
-import { useSidebarLinks } from "../hooks/useSidebarLinks";
+import { useSidebarLinks } from "../hooks/";
 import "../styles/DashboardLayout.css";
 
 export default function DashboardLayout() {

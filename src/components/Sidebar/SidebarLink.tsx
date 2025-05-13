@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "../../styles/SidebarLink.css";
-import type { SidebarLinkProps } from "../../types/SidebarLink.types";
+import type { SidebarLinkProps } from "../../types";
 
 export default function SidebarLink({
   to,

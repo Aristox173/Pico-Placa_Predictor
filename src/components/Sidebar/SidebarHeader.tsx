@@ -1,5 +1,5 @@
 import "../../styles/SidebarHeader.css";
-import type { SidebarHeaderProps } from "../../types/SidebarHeader.types";
+import type { SidebarHeaderProps } from "../../types";
 
 export default function SidebarHeader({
   collapsed,

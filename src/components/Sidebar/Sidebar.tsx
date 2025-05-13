@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import SidebarHeader from "./SidebarHeader";
-import SidebarLink from "./SidebarLink";
+import { SidebarHeader, SidebarLink } from "../";
 import "../../styles/Sidebar.css";
-import type { SidebarProps } from "../../types/Sidebar.types";
+import type { SidebarProps } from "../../types";
 
 export default function Sidebar({ links = [] }: SidebarProps) {
   const [collapsed, setCollapsed] = useState(false);

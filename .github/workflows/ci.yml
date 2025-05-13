@@ -12,7 +12,7 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Setup Node.js
@@ -43,8 +43,8 @@ jobs:
 
       - name: Post-job success
         if: success()
-        run: echo "🎉 Pipeline finalizado correctamente. ¡Todo en orden!"
+        run: echo "Pipeline completed successfully. Everything is good!"
 
       - name: Post-job failure
         if: failure()
-        run: echo "🚨 El pipeline falló. Revisa los errores y el nivel de cobertura."
+        run: echo "Pipeline failed. Check the errors and coverage level."

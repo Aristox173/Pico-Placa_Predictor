@@ -1,4 +1,4 @@
-import type { SidebarLinkType } from "../components/Sidebar/Sidebar";
+import type { SidebarLinkType } from "../types/Sidebar.types";
 
 export function useSidebarLinks(): SidebarLinkType[] {
   return [

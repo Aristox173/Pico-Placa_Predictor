@@ -1,5 +1,5 @@
 import "../styles/PageHeader.css";
-import type { PageHeaderProps } from "../types/PageHeader.types";
+import type { PageHeaderProps } from "../types";
 
 export default function PageHeader({ title, subtitle }: PageHeaderProps) {
   return (
