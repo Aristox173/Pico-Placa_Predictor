@@ -2,6 +2,7 @@ import { useState } from "react";
 import { PageHeader, Input, DateInput, Button } from "../components/";
 import TimeInput from "../components/TimeInput";
 import "../styles/PredictorPage.css";
+import Swal from "sweetalert2";
 
 const PredictorPage = () => {
   const [plateLetters, setPlateLetters] = useState("");
@@ -18,12 +19,6 @@ const PredictorPage = () => {
     time.trim() !== "";
 
   const handlePredict = () => {
-    const formattedDate = date.toLocaleDateString("en-GB", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    });
-
     const dayMonth = date.toLocaleDateString("en-GB", {
       day: "2-digit",
       month: "2-digit",
@@ -51,9 +46,11 @@ const PredictorPage = () => {
     const holidayName = holidays[dayMonth];
 
     if (holidayName) {
-      console.log(
-        `Pico y Placa does not apply today — it's ${holidayName}. You're allowed to drive.`
-      );
+      Swal.fire({
+        icon: "info",
+        title: "Holiday",
+        text: `Pico y Placa does not apply today — it's ${holidayName}. You're allowed to drive.`,
+      });
       return;
     }
 
@@ -88,22 +85,30 @@ const PredictorPage = () => {
       restrictedDaysMap[lastDigit]?.includes(dayOfWeek) ?? false;
     const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
 
-    console.log("Plate:", `${plateLetters}-${plateNumbers}`);
-    console.log("Date:", formattedDate);
-    console.log("Time:", time);
-
     if (isWeekend) {
-      console.log("It's the weekend. You're allowed to drive.");
+      Swal.fire({
+        icon: "success",
+        title: "Weekend",
+        text: "It's the weekend. You're allowed to drive.",
+      });
     } else if (!isRestrictedToday) {
-      console.log("Your vehicle is allowed to circulate today.");
+      Swal.fire({
+        icon: "success",
+        title: "No Restriction",
+        text: "Your vehicle is allowed to circulate today.",
+      });
     } else if (isInRestrictedHour) {
-      console.log(
-        "You have Pico y Placa today and you're within restricted hours. You cannot drive."
-      );
+      Swal.fire({
+        icon: "error",
+        title: "Pico y Placa Active",
+        text: "You have Pico y Placa today and you're within restricted hours. You cannot drive.",
+      });
     } else {
-      console.log(
-        "You have Pico y Placa today, but you're outside restricted hours. You're allowed to drive."
-      );
+      Swal.fire({
+        icon: "warning",
+        title: "Outside Restricted Hours",
+        text: "You have Pico y Placa today, but you're outside restricted hours. You're allowed to drive.",
+      });
     }
   };
 
