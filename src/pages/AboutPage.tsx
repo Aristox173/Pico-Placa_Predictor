@@ -10,11 +10,7 @@ const AboutPage = () => {
       />
       <div className="image-container">
         <div className="image-wrapper">
-          <img
-            src="/src/assets/profile.jpeg"
-            alt="Developer"
-            className="profile-image"
-          />
+          <img src="/profile.jpeg" alt="Developer" className="profile-image" />
         </div>
       </div>
       <div className="button-container">
@@ -23,7 +19,7 @@ const AboutPage = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <button className="button flex-center">
+          <button className="linkedin-button flex-center">
             <i className="fab fa-linkedin-in"></i>
           </button>
         </a>
@@ -33,7 +29,7 @@ const AboutPage = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <button className="button flex-center">
+          <button className="github-button flex-center">
             <i className="fab fa-github"></i>
           </button>
         </a>
