@@ -1,4 +1,4 @@
-import { vi } from "vitest";
+import { vi, test, expect } from "vitest";
 
 vi.mock("../App.tsx", () => ({
   default: () => "MockedApp",
@@ -6,7 +6,7 @@ vi.mock("../App.tsx", () => ({
 
 import "../main.tsx";
 
-test("debe renderizar App en #root", () => {
+test("should render App inside #root", () => {
   const root = document.getElementById("root");
   expect(root?.innerHTML).toContain("MockedApp");
 });
