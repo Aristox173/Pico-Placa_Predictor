@@ -131,4 +131,4 @@ Tests 49 passed (49)
 
 ## Deployment
 
-The project is deployed to Vercel. Changes pushed to the main branch are automatically deployed. Check the live version at: [Vercel Deployment](https://pico-placa-predictor-psi.vercel.app/)
+The project is deployed to Vercel. Changes pushed to the main branch are automatically deployed. Check the live version at: [Vercel Deployment](pico-placa-predictor-psi.vercel.app)
