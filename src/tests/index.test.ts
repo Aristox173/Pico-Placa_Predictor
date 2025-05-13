@@ -6,6 +6,9 @@ describe("components/index exports", () => {
   it("should export all expected components", () => {
     expect(Components.Button).toBeDefined();
     expect(Components.Container).toBeDefined();
+    expect(Components.Input).toBeDefined();
+    expect(Components.DateInput).toBeDefined();
+    expect(Components.TimeInput).toBeDefined();
     expect(Components.PageHeader).toBeDefined();
     expect(Components.Sidebar).toBeDefined();
     expect(Components.SidebarHeader).toBeDefined();
@@ -16,6 +19,8 @@ describe("components/index exports", () => {
 describe("hooks/index exports", () => {
   it("should export useSidebarLinks", () => {
     expect(Hooks.useSidebarLinks).toBeDefined();
+    expect(Hooks.useInputValidation).toBeDefined();
+    expect(Hooks.useDatePicker).toBeDefined();
   });
 });
 
