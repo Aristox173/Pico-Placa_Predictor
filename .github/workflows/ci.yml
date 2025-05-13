@@ -1,0 +1,50 @@
+name: CI - Test and Coverage
+
+on:
+  pull_request:
+    branches: [dev]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Run tests with coverage
+        run: npx vitest run --coverage --silent
+
+      - name: Enforce minimum coverage (>= 70%)
+        run: |
+          TOTAL=$(node -pe "require('./coverage/coverage-summary.json').total.statements.pct")
+          echo "Total statement coverage: $TOTAL%"
+          if [ "$TOTAL" -lt 70 ]; then
+            echo "Coverage is below 70%"
+            exit 1
+          else
+            echo "Coverage is acceptable (>= 70%)"
+          fi
+
+      - name: Post-job success
+        if: success()
+        run: echo "Pipeline completed successfully. Everything is good!"
+
+      - name: Post-job failure
+        if: failure()
+        run: echo "Pipeline failed. Check the errors and coverage level."

@@ -1,0 +1,54 @@
+.predictor-page {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.predictor-form {
+  padding: 2rem;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.plate-input-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+
+.plate-input-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 0.25rem;
+}
+
+.plate-separator {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+@media (max-width: 640px) {
+  .predictor-form {
+    padding: 1.25rem;
+    border-radius: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .plate-input-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .plate-separator {
+    margin: 0;
+    font-size: 1rem;
+    text-align: center;
+  }
+}
