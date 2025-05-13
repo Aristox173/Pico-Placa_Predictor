@@ -28,14 +28,12 @@ describe("Sidebar", () => {
       </MemoryRouter>
     );
 
-    // El título solo aparece cuando no está colapsado
     const title = screen.getByText("PREDICTOR");
     expect(title).toBeInTheDocument();
 
     const toggleButton = screen.getByRole("button");
     fireEvent.click(toggleButton);
 
-    // El título debería desaparecer tras colapsar
     expect(screen.queryByText("PREDICTOR")).toBeNull();
   });
 

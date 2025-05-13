@@ -10,8 +10,6 @@ const PredictorPage = () => {
   const [date, setDate] = useState<Date>(new Date());
   const [time, setTime] = useState("08:00");
 
-  //const plate = `${plateLetters}-${plateNumbers}`;
-
   const isFormValid =
     plateLetters.trim().length === 3 &&
     plateNumbers.trim().length === 4 &&

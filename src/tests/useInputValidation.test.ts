@@ -24,8 +24,8 @@ describe("useInputValidation", () => {
       useInputValidation({ onlyNumbers: true, onChange })
     );
 
-    result.current(createMockEvent("123")); // válido
-    result.current(createMockEvent("abc")); // inválido
+    result.current(createMockEvent("123"));
+    result.current(createMockEvent("abc"));
 
     expect(onChange).toHaveBeenCalledTimes(1);
   });
@@ -36,8 +36,8 @@ describe("useInputValidation", () => {
       useInputValidation({ onlyLetters: true, onChange })
     );
 
-    result.current(createMockEvent("abc")); // válido
-    result.current(createMockEvent("123")); // inválido
+    result.current(createMockEvent("abc"));
+    result.current(createMockEvent("123"));
 
     expect(onChange).toHaveBeenCalledTimes(1);
   });
@@ -48,7 +48,7 @@ describe("useInputValidation", () => {
       useInputValidation({ onlyLetters: true, onlyNumbers: true, onChange })
     );
 
-    result.current(createMockEvent("123abc")); // inválido
+    result.current(createMockEvent("123abc"));
     expect(onChange).not.toHaveBeenCalled();
   });
 });
