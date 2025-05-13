@@ -4,3 +4,5 @@ export type { PageHeaderProps } from "./PageHeader.types";
 export type { SidebarProps, SidebarLinkType } from "./Sidebar.types";
 export type { SidebarHeaderProps } from "./SidebarHeader.types";
 export type { SidebarLinkProps } from "./SidebarLink.types";
+export type { InputProps, InputValidationOptions } from "./Input.types";
+export type { DateInputProps } from "./DateInput.types";
