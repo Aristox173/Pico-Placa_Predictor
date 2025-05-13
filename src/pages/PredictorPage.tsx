@@ -7,9 +7,9 @@ const PredictorPage = () => {
   const [plateLetters, setPlateLetters] = useState("");
   const [plateNumbers, setPlateNumbers] = useState("");
   const [date, setDate] = useState<Date>(new Date());
-  const [time, setTime] = useState("08:00 AM");
+  const [time, setTime] = useState("08:00");
 
-  const plate = `${plateLetters}-${plateNumbers}`;
+  //const plate = `${plateLetters}-${plateNumbers}`;
 
   const isFormValid =
     plateLetters.trim().length === 3 &&
@@ -24,9 +24,87 @@ const PredictorPage = () => {
       year: "numeric",
     });
 
-    console.log("Placa:", plate);
-    console.log("Fecha:", formattedDate);
-    console.log("Hora:", time);
+    const dayMonth = date.toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "2-digit",
+    });
+
+    const holidays: Record<string, string> = {
+      "01/01": "New Year's Day",
+      "15/02": "Carnival",
+      "16/02": "Carnival",
+      "02/04": "Good Friday",
+      "30/04": "Labor Day Holiday",
+      "01/05": "Labor Day",
+      "24/05": "Battle of Pichincha",
+      "28/07": "National Holidays",
+      "29/07": "National Holidays",
+      "09/08": "National Day",
+      "08/10": "Guayaquil Independence Holiday",
+      "09/10": "Guayaquil Independence",
+      "01/11": "Cuenca Independence Holiday",
+      "02/11": "All Souls' Day",
+      "24/12": "Christmas Eve",
+      "25/12": "Christmas",
+    };
+
+    const holidayName = holidays[dayMonth];
+
+    if (holidayName) {
+      console.log(
+        `Pico y Placa does not apply today — it's ${holidayName}. You're allowed to drive.`
+      );
+      return;
+    }
+
+    const lastDigit = plateNumbers.slice(-1);
+    const dayOfWeek = date.getDay();
+
+    const restrictedDaysMap: Record<string, number[]> = {
+      "1": [1],
+      "2": [1],
+      "3": [2],
+      "4": [2],
+      "5": [3],
+      "6": [3],
+      "7": [4],
+      "8": [4],
+      "9": [5],
+      "0": [5],
+    };
+
+    const [hourStr, minuteStr] = time.split(":");
+    const hour = parseInt(hourStr);
+    const minute = parseInt(minuteStr);
+    const totalMinutes = hour * 60 + minute;
+
+    const inMorningRestriction =
+      totalMinutes >= 7 * 60 && totalMinutes <= 9 * 60 + 30;
+    const inEveningRestriction =
+      totalMinutes >= 16 * 60 && totalMinutes <= 19 * 60 + 30;
+    const isInRestrictedHour = inMorningRestriction || inEveningRestriction;
+
+    const isRestrictedToday =
+      restrictedDaysMap[lastDigit]?.includes(dayOfWeek) ?? false;
+    const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+
+    console.log("Plate:", `${plateLetters}-${plateNumbers}`);
+    console.log("Date:", formattedDate);
+    console.log("Time:", time);
+
+    if (isWeekend) {
+      console.log("It's the weekend. You're allowed to drive.");
+    } else if (!isRestrictedToday) {
+      console.log("Your vehicle is allowed to circulate today.");
+    } else if (isInRestrictedHour) {
+      console.log(
+        "You have Pico y Placa today and you're within restricted hours. You cannot drive."
+      );
+    } else {
+      console.log(
+        "You have Pico y Placa today, but you're outside restricted hours. You're allowed to drive."
+      );
+    }
   };
 
   return (
